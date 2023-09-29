@@ -24,9 +24,9 @@ return new class extends Migration
             $table->date('tgl_asesmen');
             $table->time('waktu_asesmen');
             $table->string('tuk_asesmen');
-            $table->string('asesi_1');
-            $table->string('asesor');
-            $table->string('asesi_2');
+            $table->longText('asesi_1');
+            $table->longText('asesor');
+            $table->longText('asesi_2');
             $table->string('ttd_asesor');
             $table->string('ttd_asesi');
             $table->timestamps();

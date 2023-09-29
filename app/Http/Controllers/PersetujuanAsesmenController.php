@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PersetujuanAsesmen;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\PersetujuanAsesmen;
 
 class PersetujuanAsesmenController extends Controller
 {
@@ -44,24 +45,29 @@ class PersetujuanAsesmenController extends Controller
             'asesi_1' => 'required',
             'asesor' => 'required',
             'asesi_2' => 'required',
-            'ttd_asesor' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'ttd_asesi' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'ttd_asesor' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'ttd_asesi' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
+        // dd($request->all());
+
         // Upload tanda tangan asesor
-        $ttdAsesorPath = $request->file('ttd_asesor')->store('tanda_tangan');
+        $ttdAsesorPath = $request->file('ttd_asesor')->store('public/tanda_tangan');
 
         // Upload tanda tangan asesi
-        $ttdAsesiPath = $request->file('ttd_asesi')->store('tanda_tangan');
+        $ttdAsesiPath = $request->file('ttd_asesi')->store('public/tanda_tangan');
 
         // Simpan data asesmen jika validasi berhasil
-        PersetujuanAsesmen::create(array_merge($request->all(), [
-            'ttd_asesor' => $ttdAsesorPath,
-            'ttd_asesi' => $ttdAsesiPath,
-        ]));
+        PersetujuanAsesmen::create(array_merge(
+            $request->all(),
+            [
+                'ttd_asesor' => Str::after($ttdAsesorPath, 'public/'), // Simpan path yang dapat diakses secara publik
+                'ttd_asesi' => Str::after($ttdAsesiPath, 'public/'), // Simpan path yang dapat diakses secara publik
+            ]
+        ));
+        // PersetujuanAsesmen::create($request->all());
 
         return redirect()->route('asesmens.index')->with('success', 'Data asesmen berhasil disimpan.');
-
     }
 
     /**

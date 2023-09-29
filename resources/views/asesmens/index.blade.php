@@ -519,9 +519,10 @@
               <h5 class="card-title">Masukkan Data</h5>
 
               <!-- General Form Elements -->
-              <form>
+              <form method="POST" action="{{ route('asesmens.store') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="row mb-3">
-                  <label for="sekma" class="col-sm-4 col-form-label">Skema Sertifikasi</label>
+                  <label for="skema" class="col-sm-4 col-form-label">Skema Sertifikasi</label>
                   <div class="col-sm-8">
                     <select name="skema" id="skema" class="form-select">
                         <option selected>Pilih Skema Sertifikasi</option>
@@ -575,7 +576,7 @@
                 <div class="row mb-3">
                     <legend class="col-form-label col-sm-4 pt-0">Bukti Yang Akan Dikumpulkan</legend>
                     <div class="col-sm-8">
-
+                      
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="portofolio" name="bukti" value="verifikasi portofolio">
                         <label class="form-check-label" for="portofolio">
@@ -634,21 +635,21 @@
                 <div class="row mb-3">
                   <label for="inputPassword" class="col-sm-4 col-form-label">Asesi</label>
                   <div class="col-sm-8">
-                    <textarea class="form-control" name="asesi_1" style="height: 65px" readonly disabled>Bahwa saya sudah mendapatkan Penjelasan Hak dan Prosedur Banding Oleh Asesor</textarea>
+                    <textarea class="form-control" name="asesi_1" style="height: 65px" readonly>Bahwa saya sudah mendapatkan Penjelasan Hak dan Prosedur Banding Oleh Asesor</textarea>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="inputPassword" class="col-sm-4 col-form-label">Asesor</label>
                     <div class="col-sm-8">
-                      <textarea class="form-control" name="asesor" style="height: 145px" readonly disabled>Menyatakan tidak akan membuka hasil pekerjaan yang saya peroleh karena penugasan saya sebagai asesor dalam pekerjaan asesmen kepada siapapun atau organisasi apapun selain kepada pihak yang berwenang sehubungan dengan kewajiban saya sebagai asesor yang ditugaskan oleh LSP</textarea>
+                      <textarea class="form-control" name="asesor" style="height: 145px" readonly>Menyatakan tidak akan membuka hasil pekerjaan yang saya peroleh karena penugasan saya sebagai asesor dalam pekerjaan asesmen kepada siapapun atau organisasi apapun selain kepada pihak yang berwenang sehubungan dengan kewajiban saya sebagai asesor yang ditugaskan oleh LSP</textarea>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="inputPassword" class="col-sm-4 col-form-label">Asesi</label>
                     <div class="col-sm-8">
-                      <textarea class="form-control" name="asesi_2" style="height: 120px" readonly disabled>Saya setuju mengikuti asesmen dengan pemahaman bahwa informasi yang dikumpulkan hanya digunakan untuk pengembangan profesional dan hanya dapat diakses oleh orang tertentu saja</textarea>
+                      <textarea class="form-control" name="asesi_2" style="height: 120px" readonly>Saya setuju mengikuti asesmen dengan pemahaman bahwa informasi yang dikumpulkan hanya digunakan untuk pengembangan profesional dan hanya dapat diakses oleh orang tertentu saja</textarea>
                     </div>
                 </div>
 
@@ -668,10 +669,11 @@
 
                 <div class="row mb-3">
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Kirim</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Simpan</button>
                   </div>
                 </div>
 
+                
               </form><!-- End General Form Elements -->
 
             </div>
@@ -711,7 +713,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
 </body>
 
 </html>
